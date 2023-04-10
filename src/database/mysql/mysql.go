@@ -68,12 +68,6 @@ func NewConnection() IDB {
 		sqlDB.SetMaxOpenConns(10)
 		sqlDB.SetMaxIdleConns(2)
 		conn.pool[dbName] = gormDB
-
-		for _, table := range Tables(dbName) {
-			if !gormDB.Migrator().HasTable(table) {
-				log.Fatal(fmt.Sprintf("database [%s] table [%s] not exist", dbName, table))
-			}
-		}
 	}
 	return conn
 }
