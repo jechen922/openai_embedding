@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"openai_golang/chatAI"
+	"openaigo/chatAI"
 )
 
 var addr = flag.String("addr", ":8080", "http service address")
@@ -20,7 +20,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
-	http.ServeFile(w, r, "websocket/home.html")
+	http.ServeFile(w, r, "../view/index.html")
 }
 
 func Start() {

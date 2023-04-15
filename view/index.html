@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>聊天工具</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+        <div id="mobile">
+            <div class="header">
+                <a href="javascript:void(0)" id="openMenu"><i class="fa-solid fa-bars"></i></a>
+                <span class="title">主題1</span>
+                <a href="" id="openMenu2"><i class="fa-solid fa-house"></i></a>
+            </div>
+        </div>
+        <div id="menu" class="menu">
+            <div class="top">
+                <div class="item item-top"><a href=""><i class="fa-solid fa-plus"></i>新聊天</a></div>
+                <div class="item item-child active"><a href="">主題1</a></div>
+                <div class="item item-child"><a href="">主題2</a></div>
+                <div class="item item-child"><a href="">主題3</a></div>
+                <div class="item item-child"><a href="">主題4</a></div>
+            </div>
+            <div class="bottom">
+                <div class="item"><a href="javascript:void(0)" id="clear"><i class="fa-solid fa-trash"></i>清除聊天</a></div>
+                
+                <div class="item"><a href="javascript:void(0)" id="logout"><i class="fa-solid fa-right-from-bracket"></i>登出</a></div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="chat_wrapper">
+                <div class="message-intro">
+                    <h1 class="title">聊天工具</h1>
+                </div>
+                <div class="message-list" id="message-list">
+                </div>
+                <div class="chat_box">
+                    <button id="stop" type="button" class="chat_btn"><i class="fa-solid fa-stop"></i>停止</button>
+                    <button id="refresh" type="button" class="chat_btn"><i class="fa-solid fa-rotate-right"></i>重新整理</button>
+
+                    <div class="message-input">
+                        <textarea id="message-input" type="text" placeholder="請輸入內容..." rows="2"></textarea>
+                        <button id="send-button"><i class="fa-regular fa-comments"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

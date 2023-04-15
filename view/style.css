@@ -1,0 +1,325 @@
+*{
+    box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    border-radius: 80px;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #d7d7d7;
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 80px;
+    box-shadow: inset 0 0 6px #000000;
+    border-radius: 100px;
+}
+.message-input textarea {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+}
+
+.message-input button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+
+/*以下人寫得 以上AI寫*/
+body{
+    color: rgba(255,255,255,0.9);
+    background: #343541;
+}
+a{
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+}
+.container{
+    display: flex;
+    padding-left: 260px;
+}
+/*選單*/
+
+#menu{
+    width: 260px;
+    height: 100vh;
+    background: #202123;
+    padding: 7px;
+    transition: all ease .3s;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99990;
+}
+.menu .top {
+    height: calc(100vh - 130px);
+    overflow-y: auto;
+}
+.menu .bottom{
+    padding: 7px;
+    position: absolute;
+    bottom: 0;
+    border-top: solid 1px hsla(0,0%,100%,.2);
+    left: 0;
+    right: 0;
+}
+.menu .item-top a{
+    border: solid 1px hsla(0,0%,100%,.2);
+}
+.menu .item i{
+    display: inline-block;
+    margin-right: 5px;
+}
+.menu .item a{  
+    display: block;
+    text-align: left;
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: all ease .3s;
+}
+.menu .item a:hover,.menu .item.active a{
+    background-color: rgb(52,53,65);
+}
+.menu .item-child a:before{
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 400;
+    content: "\f075";
+    margin-right: 5px;
+    display: inline-block;
+}
+/*內容*/
+.content{
+    width: 100%;
+    background: #343541;
+    height: 100vh;
+    position: relative;
+    transition: all ease .3s;
+    padding: 0px;
+}
+.chat_box{
+    position: fixed;
+    bottom: 0px;
+    background: #343541;
+    padding: 10px;
+    left: 260px;
+    right: 0;
+}
+.chat_wrapper{
+    margin: auto;    
+    padding-bottom: 151px;
+}
+
+.message-list .message-box{
+    max-width: 48rem;
+    display: flex;
+    align-items: flex-start;
+    margin: auto;
+}
+
+.message-list .message{
+    padding:20px 15px;
+    border-color: rgba(32,33,35,.5);
+}
+.message-list .message.message-owner{
+    background: #444654;
+}
+
+.message-list .message .message-sender{
+    width: 35px;
+    height: 35px;
+    background: #058acf;
+    line-height: 35px;
+    text-align: center;
+    display: block;
+    font-size: 10px;
+    min-width: 35px;
+}
+.message-list .message.message-owner .message-sender{
+    background: #0f8d00;
+}
+.message-list .message .message-content{
+    display: block;
+    padding: 9px 20px;
+    line-height: 1.2;
+}
+
+.message-input{
+    max-width: 48rem;
+    position: relative;
+    margin:15px auto 0;    
+
+}
+.message-input textarea{
+    color: #fff;
+    border-color: rgba(32,33,35,.5);
+    background-color: rgb(64,65,79);
+    box-shadow: 0 0 transparent,0 0 transparent,0 0 15px rgba(0,0,0,.1);
+    max-height: 200px;
+    /*height: 48px;*/
+    line-height: 1.6;
+    overflow-y: hidden;
+    font-size: 1.2rem;
+    max-width: 100%;
+
+}
+.message-input textarea:focus{
+    outline: 0;
+}
+.message-input button{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    color: #a5a5a5;
+    font-size: 1.2rem;
+    background: transparent;
+}
+
+.message-input button:hover {
+  background-color: #0050c8;
+}
+.content-effect:after {
+    -webkit-animation: blink 1s steps(5,start) infinite;
+    animation: blink 1s steps(5,start) infinite;
+    content: "▋";
+    margin-left: .25rem;
+    vertical-align: baseline
+}
+@-webkit-keyframes blink {
+    to {
+        visibility: hidden
+    }
+}
+
+@keyframes blink {
+    to {
+        visibility: hidden
+    }
+}
+.chat_btn{
+    display: none;
+    text-align: left;
+    padding: 7px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: all ease .3s;
+    border: solid 1px hsla(0,0%,100%,.2);
+    background: transparent;
+    margin: auto;
+    cursor: pointer;
+    color: rgba(255,255,255,0.9);
+}
+.chat_btn i{
+    display: inline-block;
+    margin-right: 5px;
+}
+.chat_btn:hover{
+    background-color: rgb(48 49 60); 
+}
+#mobile{
+    display: none;
+}
+@media screen and (max-width: 768px) {
+
+    #mobile{
+        display: block;
+    }
+    .header{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        z-index: 9999;
+        align-items: center;
+        border-bottom:solid 1px hsla(0,0%,100%,.2);
+        background: #343541;
+    }
+    .container{
+        padding-top: 50px;
+        padding-bottom: 141px;
+        padding-left: 0;
+    }
+    .header .title{
+        width: calc(100% - 100px);
+        text-align: center;
+    }
+    .header a{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: #ddd;
+        transition: all ease .3s;
+    }
+    .header a:hover{
+        color: #fefefe;
+    }
+    #menu{
+        left: -260px;
+        position: fixed;
+        top: 0;
+    }
+    body{
+        min-height: 100vh;
+    }
+    body.activeMenu:before{
+        content: '';
+        position: absolute;
+        display: block;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 99990;
+    }
+    .activeMenu #menu{
+        left: 0;
+    }
+    .content{
+        width: 100% ;
+        height: calc(100% - 50px - 141px);
+    }
+    .chat_box{
+        left: 0;
+    }
+   
+
+}

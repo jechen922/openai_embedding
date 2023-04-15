@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"openai_golang/chatAI"
+	"openaigo/chatAI"
 	"time"
 
 	"github.com/gorilla/websocket"

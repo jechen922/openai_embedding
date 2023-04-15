@@ -3,7 +3,7 @@ package repository
 import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
-	"openai_golang/src/model/po"
+	"openaigo/src/model/po"
 )
 
 type EmbeddingRepo struct{}

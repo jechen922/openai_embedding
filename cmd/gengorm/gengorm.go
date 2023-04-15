@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
-	"openai_golang/cmd"
-	"openai_golang/config"
-	"openai_golang/src/database/mysql"
+	"openaigo/cmd"
+	"openaigo/config"
+	"openaigo/src/database/mysql"
 	"os"
 	"path"
 	"path/filepath"

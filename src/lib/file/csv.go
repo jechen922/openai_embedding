@@ -10,6 +10,8 @@ func ReadCSVByFields(path string, fields ...string) []map[string]string {
 	// 開啟 CSV 檔案
 	file, err := os.Open(path)
 	if err != nil {
+		currentPath, _ := os.Getwd()
+		fmt.Println("fullPath:", currentPath+path)
 		panic(err)
 	}
 	defer file.Close()

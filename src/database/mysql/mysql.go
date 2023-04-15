@@ -3,7 +3,7 @@ package mysql
 import (
 	"fmt"
 	"log"
-	"openai_golang/config"
+	"openaigo/config"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
