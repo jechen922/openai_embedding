@@ -19,9 +19,9 @@ var tableMap = map[string][]string{
 	DBOpenAI: {"embedding"},
 }
 
-func DSNMap() map[string]string {
+func DSNMap(cfg config.Config) map[string]string {
 	dsnMap := make(map[string]string, len(tableMap))
-	dsnMap[DBOpenAI] = config.GetMysqlEnv().DSNAccount
+	dsnMap[DBOpenAI] = cfg.GetMysqlENV().DSNAccount
 	return dsnMap
 }
 
@@ -40,16 +40,17 @@ func GormConfig(logMode logger.LogLevel) *gorm.Config {
 	}
 }
 
-func NewConnection() IDB {
+func NewConnection(cfg config.Config) IDB {
 	conn = &connection{
-		pool: make(map[string]*gorm.DB),
+		config: cfg,
+		pool:   make(map[string]*gorm.DB),
 	}
 	mode := logger.Silent
-	if config.GetSystemENV().RunMode == config.RunModeLocal {
+	if cfg.GetSystemENV().RunMode == config.RunModeLocal {
 		mode = logger.Info
 	}
 	gormConfig := GormConfig(mode)
-	for dbName, dsn := range DSNMap() {
+	for dbName, dsn := range DSNMap(cfg) {
 		gormDB, err := gorm.Open(
 			mysql.New(mysql.Config{
 				DSN:                       dsn,   // data source name

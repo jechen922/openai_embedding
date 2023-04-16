@@ -16,11 +16,9 @@ import (
 )
 
 func main() {
-	if err := config.EnvInit(); err != nil {
-		log.Fatal(err)
-	}
+	cfg := config.New()
 
-	for dbName, dsn := range mysql.DSNMap() {
+	for dbName, dsn := range mysql.DSNMap(cfg) {
 		app := &cli.App{
 			Description: "manage database migrations",
 			ArgsUsage:   "",

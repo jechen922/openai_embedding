@@ -24,8 +24,12 @@ func (cfg Config) GetSystemENV() SystemENV {
 	return cfg.SystemENV
 }
 
-func (cfg Config) GetPostgresENV() MysqlENV {
+func (cfg Config) GetMysqlENV() MysqlENV {
 	return cfg.MysqlENV
+}
+
+func (cfg Config) GetPostgresENV() PostgresENV {
+	return cfg.PostgresENV
 }
 
 func (cfg Config) GetServiceName() string {

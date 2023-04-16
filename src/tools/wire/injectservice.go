@@ -1,10 +1,10 @@
 package wire
 
 import (
-	"database/sql"
 	"encoding/json"
 	"openaigo/config"
 	"openaigo/src/database"
+	"openaigo/src/database/postgres"
 	"openaigo/src/handler"
 	"openaigo/src/lib/logger"
 	"openaigo/src/repository"
@@ -54,8 +54,9 @@ func provideFiber() *fiber.App {
 	})
 }
 
-func provideDatabase(postgresDB *sql.DB) database.IDatabase {
-	return database.New(postgresDB)
+func provideDatabase() (database.IDatabase, error) {
+	postgresDB, err := postgres.New()
+	return database.New(postgresDB), err
 }
 
 func provideValidator(l logger.ILogger) validator.IValidate {

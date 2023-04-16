@@ -15,6 +15,7 @@ const (
 type Config struct {
 	SystemENV
 	MysqlENV
+	PostgresENV
 	Logger
 }
 
@@ -30,6 +31,10 @@ type SystemENV struct {
 }
 
 type MysqlENV struct {
+	DSNAccount string `env:"ACCOUNT_MYSQL_URL" envDefault:"stock_user:secret@tcp(db:3306)/stock?parseTime=true&loc=Local"`
+}
+
+type PostgresENV struct {
 	DSNAccount string `env:"ACCOUNT_MYSQL_URL" envDefault:"stock_user:secret@tcp(db:3306)/stock?parseTime=true&loc=Local"`
 }
 

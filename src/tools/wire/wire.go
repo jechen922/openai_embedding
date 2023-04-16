@@ -5,8 +5,8 @@ package wire
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"rewarddistribution/config"
-	"rewarddistribution/src/router"
+	"openaigo/config"
+	"openaigo/src/router"
 
 	"github.com/google/wire"
 )

@@ -1,6 +1,9 @@
 package mysql
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+	"openaigo/config"
+)
 
 var conn *connection
 
@@ -15,7 +18,8 @@ type IDB interface {
 }
 
 type connection struct {
-	pool map[string]*gorm.DB
+	config config.Config
+	pool   map[string]*gorm.DB
 }
 
 func (c *connection) Conn(dbName string) *gorm.DB {
