@@ -22,17 +22,6 @@ func NewSeed(postgresDB *sql.DB) ISeedService {
 }
 
 func (s *seedService) SaveSections(sections []embedding.Section) error {
-	// 計算向量儲存至資料庫
-	//csvRecords := file.ReadCSVByFields("../../../resources/yile/yile.csv", "title", "heading", "content")
-	//sections := make([]embedding.Section, 0, len(csvRecords))
-	//for _, record := range csvRecords {
-	//	sections = append(sections, embedding.Section{
-	//		Title:   record["title"],
-	//		Heading: record["heading"],
-	//		Content: record["content"],
-	//	})
-	//}
-
 	for _, section := range sections {
 		result, err := embedding.Create(section)
 		if err != nil {

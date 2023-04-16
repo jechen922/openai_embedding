@@ -1,30 +1,33 @@
 package config
 
 import (
+	"fmt"
+	"log"
+
 	"github.com/caarlos0/env/v6"
 	"github.com/go-playground/validator"
 )
 
-// config 管理所有通用參數，包含各種來源：env, json file等
-
-var _env = &Env{}
-
-func EnvInit() error {
-	if err := env.Parse(_env); err != nil {
-		return err
+func New() Config {
+	cfg := Config{}
+	if err := env.Parse(&cfg); err != nil {
+		log.Fatal(fmt.Errorf("parse config fail, reason : %v", err))
 	}
 
-	if err := validator.New().Struct(_env); err != nil {
-		return err
+	if err := validator.New().Struct(&cfg); err != nil {
+		log.Fatal(fmt.Errorf("validate config fail, reason : %v", err))
 	}
-
-	return nil
+	return cfg
 }
 
-func GetSystemENV() SystemENV {
-	return _env.SystemENV
+func (cfg Config) GetSystemENV() SystemENV {
+	return cfg.SystemENV
 }
 
-func GetMysqlEnv() MysqlENV {
-	return _env.MysqlENV
+func (cfg Config) GetPostgresENV() MysqlENV {
+	return cfg.MysqlENV
+}
+
+func (cfg Config) GetServiceName() string {
+	return serviceName
 }

@@ -1,8 +1,10 @@
 package router
 
 import (
+	"openaigo/config"
+	"openaigo/src/handler"
+	
 	"github.com/gofiber/fiber/v2"
-	"openaigo/src/handler/seedhandler"
 )
 
 type (
@@ -10,19 +12,17 @@ type (
 		Set(r fiber.Router)
 	}
 
-	//Router struct {
-	//	config  config.Config
-	//	handler handler.ICore
-	//}
+	Router struct {
+		config  config.Config
+		handler handler.ICore
+	}
 )
 
-//func New(h handler.ICore) IRouter {
-//	return Router{handler: h}
-//}
+func New(h handler.ICore) IRouter {
+	return Router{handler: h}
+}
 
-//func (r Router) Set(fRoute fiber.Router) {
-
-func Set(fRoute fiber.Router) {
-	fRoute.Get("/train", seedhandler.Seed)
+func (r Router) Set(fRoute fiber.Router) {
+	fRoute.Get("/train", r.handler.Seed().Train)
 
 }

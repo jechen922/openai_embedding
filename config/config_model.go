@@ -1,18 +1,21 @@
 package config
 
 const (
-	RunModeDebug      = "debug"
-	RunModeProduction = "production"
-	RunModeLocal      = "local"
-)
-const (
-	LogLevelInfo  = "info"
-	LogLevelError = "error"
+	serviceName = "openai" // 不可修改，會影響資料一致性
 )
 
-type Env struct {
+type RunMode = string
+
+const (
+	RunModeDebug      RunMode = "debug"
+	RunModeProduction RunMode = "production"
+	RunModeLocal      RunMode = "local"
+)
+
+type Config struct {
 	SystemENV
 	MysqlENV
+	Logger
 }
 
 var version = "v0.0.0"
@@ -28,4 +31,15 @@ type SystemENV struct {
 
 type MysqlENV struct {
 	DSNAccount string `env:"ACCOUNT_MYSQL_URL" envDefault:"stock_user:secret@tcp(db:3306)/stock?parseTime=true&loc=Local"`
+}
+
+type Logger struct {
+	FilePath      string `env:"filePath"`
+	Level         string `env:"level"`
+	MaxSize       int    `env:"maxSize"`
+	MaxBackups    int    `env:"maxBackups"`
+	MaxAge        int    `env:"maxAge"`
+	Compress      bool   `env:"compress"`
+	ServiceName   string `env:"serviceName"`
+	IsShowConsole bool   `env:"isShowConsole"`
 }

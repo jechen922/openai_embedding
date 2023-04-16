@@ -2,9 +2,9 @@ package logger
 
 import (
 	"fmt"
+	"openaigo/config"
 	"os"
 	"path/filepath"
-	"stock_spider/src/tools/config"
 	"strings"
 	"sync"
 

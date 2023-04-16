@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"openaigo/config"
 	"openaigo/src/router"
+	"openaigo/websocket"
 )
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
@@ -53,10 +54,13 @@ func main() {
 	app := fiber.New(fiber.Config{
 		JSONEncoder: json.Marshal,
 	})
+
+	app.Static("/", "./view/")
+	go websocket.Start()
+
 	router.Set(app)
 	err := app.Listen(":8081")
 	if err != nil {
 		panic(err) // 若啟動伺服器失敗，拋出錯誤訊息
 	}
-	//websocket.Start()
 }

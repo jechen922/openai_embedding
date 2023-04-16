@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"openaigo/chatAI"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -31,8 +30,8 @@ var (
 )
 
 var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
+	//ReadBufferSize:  1024,
+	//WriteBufferSize: 1024,
 }
 
 // Client is a middleman between the websocket connection and the hub.
@@ -116,8 +115,8 @@ func (c *Client) writePump() {
 			if err != nil {
 				return
 			}
-			answer := chatAI.Ask(string(message))
-			//answer := "Hello! How can I assist you today?"
+			//answer := chatAI.Ask(string(message))
+			answer := "Hello! How can I assist you today?"
 			w.Write(newline)
 			w.Write([]byte("AI: " + answer))
 			if err := w.Close(); err != nil {
