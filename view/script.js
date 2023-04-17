@@ -8,7 +8,7 @@ $(function () {
     $.each($('.content-effect'), function (index, element) {
       if ($(element).text() == '') {
         let text = $(element).attr('data-val')// 欲顯示的文字
-        typeEffect($(element), text, 200); // 呼叫函數開始顯示文字
+        typeEffect($(element), text, 80); // 呼叫函數開始顯示文字
       }
 
 

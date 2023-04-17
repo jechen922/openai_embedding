@@ -32,6 +32,11 @@ var (
 var upgrader = websocket.Upgrader{
 	//ReadBufferSize:  1024,
 	//WriteBufferSize: 1024,
+	CheckOrigin: func(r *http.Request) bool {
+		// 檢查請求的來源是否允許
+		// 可以在這裡自訂邏輯來判斷是否允許該來源
+		return true // 允許所有來源
+	},
 }
 
 // Client is a middleman between the websocket connection and the hub.
@@ -97,28 +102,13 @@ func (c *Client) writePump() {
 			if err != nil {
 				return
 			}
-			w.Write([]byte("me: " + string(message)))
-
-			// Add queued chat messages to the current websocket message.
-			n := len(c.send)
-			for i := 0; i < n; i++ {
-				w.Write(newline)
-				w.Write(<-c.send)
-			}
-
-			if err := w.Close(); err != nil {
-				fmt.Println("ws.Close() error", err)
-				return
-			}
-
-			w, err = c.conn.NextWriter(websocket.TextMessage)
-			if err != nil {
-				return
-			}
 			//answer := chatAI.Ask(string(message))
 			answer := "Hello! How can I assist you today?"
-			w.Write(newline)
-			w.Write([]byte("AI: " + answer))
+			//w.Write(newline)
+			w.Write([]byte(answer))
+			fmt.Println("ws received msg :", string(message))
+			fmt.Println("ws Write msg :", answer)
+
 			if err := w.Close(); err != nil {
 				fmt.Println("ws.Close() error", err)
 				return
@@ -140,6 +130,7 @@ func serveWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+
 	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
 	client.hub.register <- client
 
