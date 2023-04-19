@@ -40,7 +40,7 @@ func (cs *customerService) Ask(question string) (string, error) {
 		return "", errors.New(fmt.Sprintf("repo AllByCategory error: %s", err.Error()))
 	}
 
-	qs, _ := embedding.Create(embedding.Section{
+	qs, _ := embedding.Content(embedding.Section{
 		Content: question,
 	})
 	// 計算向量之間的相似度

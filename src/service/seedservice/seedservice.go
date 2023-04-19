@@ -24,19 +24,34 @@ func NewSeed(postgresDB *sql.DB, repo repository.ICore) ISeedService {
 
 func (s *seedService) SaveSections(sections []embedding.Section) error {
 	for _, section := range sections {
-		result, err := embedding.Create(section)
+		categoryResult, err := embedding.Category(po.OpenAICategory{
+			Category: section.Title + "-" + section.Heading,
+		})
+		if err != nil {
+			return errors.New(fmt.Sprintf("create embedding error: %s", err.Error()))
+		}
+		openaiCategory := po.OpenAICategory{
+			Category:  section.Title + "-" + section.Heading,
+			Tokens:    categoryResult.Tokens,
+			Embedding: categoryResult.Embedding,
+		}
+		if err = s.repo.Seed().SaveCategory(s.postgresDB, openaiCategory); err != nil {
+			return errors.New(fmt.Sprintf("repo SaveCategory error: %s", err.Error()))
+		}
+
+		contentResult, err := embedding.Content(section)
 		if err != nil {
 			return errors.New(fmt.Sprintf("create embedding error: %s", err.Error()))
 		}
 		openaiContent := po.OpenAIContent{
-			Category:  result.Title,
-			Heading:   result.Heading,
-			Content:   result.Content,
-			Tokens:    result.Tokens,
-			Embedding: result.Vectors,
+			Category:  contentResult.Title,
+			Heading:   contentResult.Heading,
+			Content:   contentResult.Content,
+			Tokens:    contentResult.Tokens,
+			Embedding: contentResult.Vectors,
 		}
-		if err = s.repo.Seed().Save(s.postgresDB, openaiContent); err != nil {
-			return errors.New(fmt.Sprintf("repo save error: %s", err.Error()))
+		if err = s.repo.Seed().SaveContent(s.postgresDB, openaiContent); err != nil {
+			return errors.New(fmt.Sprintf("repo SaveContent error: %s", err.Error()))
 		}
 	}
 	return nil

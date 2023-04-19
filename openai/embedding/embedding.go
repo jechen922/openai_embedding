@@ -2,6 +2,7 @@ package embedding
 
 import (
 	"context"
+	"openaigo/src/model/po"
 	"strings"
 
 	"github.com/sashabaranov/go-openai"
@@ -19,7 +20,27 @@ func client() *openai.Client {
 	return openai.NewClient("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")
 }
 
-func Create(section Section) (Section, error) {
+func Category(category po.OpenAICategory) (po.OpenAICategory, error) {
+	embResp, err := client().CreateEmbeddings(
+		context.Background(),
+		openai.EmbeddingRequest{
+			Input: strings.Split(category.Category, ""),
+			Model: openai.AdaEmbeddingV2,
+			User:  "somebody",
+		})
+	if err != nil {
+		return po.OpenAICategory{}, err
+	}
+
+	ca := po.OpenAICategory{
+		Category:  category.Category,
+		Tokens:    embResp.Usage.TotalTokens,
+		Embedding: embResp.Data[0].Embedding,
+	}
+	return ca, nil
+}
+
+func Content(section Section) (Section, error) {
 	embResp, err := client().CreateEmbeddings(
 		context.Background(),
 		openai.EmbeddingRequest{

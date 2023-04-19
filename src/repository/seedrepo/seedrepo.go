@@ -8,7 +8,8 @@ import (
 )
 
 type ISeedRepo interface {
-	Save(db *sql.DB, c po.OpenAIContent) error
+	SaveCategory(db *sql.DB, c po.OpenAICategory) error
+	SaveContent(db *sql.DB, c po.OpenAIContent) error
 }
 
 func New() ISeedRepo {
@@ -27,7 +28,25 @@ type seedRepo struct{}
 //		    tokens = EXCLUDED.tokens,
 //		    embedding = EXCLUDED.embedding;`,
 
-func (r *seedRepo) Save(db *sql.DB, c po.OpenAIContent) error {
+func (r *seedRepo) SaveCategory(db *sql.DB, c po.OpenAICategory) error {
+	_, err := db.Exec(
+		`
+		INSERT INTO openai.category (
+			 category, tokens, embeddings
+		) VALUES (
+	  		 $1, $2, $3
+		);`,
+		c.Category,
+		c.Tokens,
+		pgvector.NewVector(c.Embedding),
+	)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *seedRepo) SaveContent(db *sql.DB, c po.OpenAIContent) error {
 	_, err := db.Exec(
 		`
 		INSERT INTO openai.contents (
