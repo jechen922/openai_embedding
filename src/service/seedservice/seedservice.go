@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"openaigo/openai/embedding"
 	"openaigo/src/model/po"
-	"openaigo/src/repository/seedrepo"
+	"openaigo/src/repository"
 )
 
 type ISeedService interface {
@@ -15,10 +15,11 @@ type ISeedService interface {
 
 type seedService struct {
 	postgresDB *sql.DB
+	repo       repository.ICore
 }
 
-func NewSeed(postgresDB *sql.DB) ISeedService {
-	return &seedService{postgresDB: postgresDB}
+func NewSeed(postgresDB *sql.DB, repo repository.ICore) ISeedService {
+	return &seedService{postgresDB: postgresDB, repo: repo}
 }
 
 func (s *seedService) SaveSections(sections []embedding.Section) error {
@@ -34,8 +35,7 @@ func (s *seedService) SaveSections(sections []embedding.Section) error {
 			Tokens:    result.Tokens,
 			Embedding: result.Vectors,
 		}
-		seedRepo := seedrepo.New()
-		if err = seedRepo.Save(s.postgresDB, openaiContent); err != nil {
+		if err = s.repo.Seed().Save(s.postgresDB, openaiContent); err != nil {
 			return errors.New(fmt.Sprintf("repo save error: %s", err.Error()))
 		}
 	}

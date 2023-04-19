@@ -17,7 +17,7 @@ type IConfig interface {
 }
 
 func New() IConfig {
-	cfg := &config{}
+	cfg := config{}
 	if err := env.Parse(&cfg); err != nil {
 		log.Fatal(fmt.Errorf("parse config fail, reason : %v", err))
 	}

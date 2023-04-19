@@ -4,11 +4,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"openaigo/config"
 	"openaigo/openai/embedding"
-	"openaigo/src/database/postgres"
 	"openaigo/src/lib/file"
 	"openaigo/src/lib/logger"
 	"openaigo/src/service"
-	"openaigo/src/service/seedservice"
 	"openaigo/src/tools/validator"
 )
 
@@ -38,9 +36,7 @@ func (h *seedHandler) Train(ctx *fiber.Ctx) error {
 		})
 	}
 
-	db, _ := postgres.New()
-	ss := seedservice.NewSeed(db)
-	if err := ss.SaveSections(sections); err != nil {
+	if err := h.service.Seed().SaveSections(sections); err != nil {
 		return err
 	}
 	return ctx.Send([]byte("OK!"))

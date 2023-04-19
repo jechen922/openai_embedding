@@ -20,10 +20,12 @@ func InitializeApplication(cfg config.IConfig) (*Application, error) {
 	if err != nil {
 		return nil, err
 	}
-	iCore := provideService(iDatabase)
+	iCore := provideRepository()
+	iai := provideOpenAI(cfg)
+	serviceICore := provideService(iDatabase, iCore, iai)
 	iLogger := provideLogger(cfg)
 	iValidate := provideValidator(iLogger)
-	handlerICore := provideHandler(cfg, iCore, iValidate, iLogger)
+	handlerICore := provideHandler(cfg, serviceICore, iValidate, iLogger)
 	iRouter := provideRouter(handlerICore)
 	application := newApplication(app, iRouter)
 	return application, nil

@@ -11,6 +11,7 @@ import (
 	"openaigo/src/router"
 	"openaigo/src/service"
 	"openaigo/src/tools/validator"
+	"openaigo/src/utils/openai"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/wire"
@@ -23,6 +24,7 @@ var serviceSet = wire.NewSet( //nolint:deadcode,unused,varcheck
 	provideRouter,
 	provideFiber,
 	provideDatabase,
+	provideOpenAI,
 	provideValidator,
 	provideLogger,
 )
@@ -31,8 +33,8 @@ func provideRepository() repository.ICore {
 	return repository.New()
 }
 
-func provideService(db database.IDatabase) service.ICore {
-	return service.New(db)
+func provideService(db database.IDatabase, repo repository.ICore, ai openai.IAI) service.ICore {
+	return service.New(db, repo, ai)
 }
 
 func provideHandler(
@@ -57,6 +59,10 @@ func provideFiber() *fiber.App {
 func provideDatabase() (database.IDatabase, error) {
 	postgresDB, err := postgres.New()
 	return database.New(postgresDB), err
+}
+
+func provideOpenAI(cfg config.IConfig) openai.IAI {
+	return openai.New(cfg)
 }
 
 func provideValidator(l logger.ILogger) validator.IValidate {

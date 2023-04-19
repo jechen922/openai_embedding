@@ -26,5 +26,6 @@ func (r Router) Set(fRoute fiber.Router) {
 	fRoute.Get("/test", func(ctx *fiber.Ctx) error {
 		return ctx.JSON(map[string]string{"status": "ok"})
 	})
+	fRoute.Get("/ask", r.handler.CustomerService().Question)
 	fRoute.Get("/train", r.handler.Seed().Train)
 }
