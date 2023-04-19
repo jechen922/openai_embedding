@@ -19,7 +19,7 @@ var tableMap = map[string][]string{
 	DBOpenAI: {"embedding"},
 }
 
-func DSNMap(cfg config.Config) map[string]string {
+func DSNMap(cfg config.IConfig) map[string]string {
 	dsnMap := make(map[string]string, len(tableMap))
 	dsnMap[DBOpenAI] = cfg.GetMysqlENV().DSNAccount
 	return dsnMap
@@ -40,7 +40,7 @@ func GormConfig(logMode logger.LogLevel) *gorm.Config {
 	}
 }
 
-func NewConnection(cfg config.Config) IDB {
+func NewConnection(cfg config.IConfig) IDB {
 	conn = &connection{
 		config: cfg,
 		pool:   make(map[string]*gorm.DB),

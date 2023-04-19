@@ -30,7 +30,7 @@ type ZapLogger struct {
 	Business         *zap.Logger
 }
 
-func New(loggerConfig config.Logger) *ZapLogger {
+func New(loggerConfig config.LoggerEnv) *ZapLogger {
 	hostName, err := os.Hostname()
 	if err != nil {
 		panic(err)

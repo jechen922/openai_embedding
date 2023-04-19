@@ -14,7 +14,7 @@ import (
 
 // Injectors from wire.go:
 
-func InitializeApplication(cfg config.Config) (*Application, error) {
+func InitializeApplication(cfg config.IConfig) (*Application, error) {
 	app := provideFiber()
 	iDatabase, err := provideDatabase()
 	if err != nil {

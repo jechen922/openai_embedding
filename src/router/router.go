@@ -13,7 +13,7 @@ type (
 	}
 
 	Router struct {
-		config  config.Config
+		config  config.IConfig
 		handler handler.ICore
 	}
 )

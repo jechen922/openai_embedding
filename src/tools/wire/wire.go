@@ -26,7 +26,7 @@ func newApplication(
 	}
 }
 
-func InitializeApplication(cfg config.Config) (*Application, error) {
+func InitializeApplication(cfg config.IConfig) (*Application, error) {
 	wire.Build(
 		serviceSet,
 		newApplication,

@@ -17,13 +17,13 @@ type IHandler interface {
 }
 
 type seedHandler struct {
-	config    config.Config
+	config    config.IConfig
 	service   service.ICore
 	validator validator.IValidate
 	logger    logger.ILogger
 }
 
-func New(cfg config.Config, serviceCore service.ICore, v validator.IValidate, iLog logger.ILogger) IHandler {
+func New(cfg config.IConfig, serviceCore service.ICore, v validator.IValidate, iLog logger.ILogger) IHandler {
 	return &seedHandler{config: cfg, service: serviceCore, validator: v, logger: iLog}
 }
 

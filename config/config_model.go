@@ -12,11 +12,11 @@ const (
 	RunModeLocal      RunMode = "local"
 )
 
-type Config struct {
+type config struct {
 	SystemENV
 	MysqlENV
 	PostgresENV
-	Logger
+	LoggerEnv
 }
 
 var version = "v0.0.0"
@@ -25,9 +25,10 @@ var version = "v0.0.0"
 type SystemENV struct {
 	//Project     string `env:"project" validate:"required"`
 	//Environment string `env:"environment" validate:"required"`
-	Port     int    `env:"port" envDefault:"8080"`
-	RunMode  string `env:"runMode" envDefault:"local"`
-	Timezone string `env:"timezone" envDefault:"UTC"`
+	Port         int    `env:"port" envDefault:"8080"`
+	RunMode      string `env:"runMode" envDefault:"local"`
+	Timezone     string `env:"timezone" envDefault:"UTC"`
+	ChatGPTToken string `env:"CHAT_GPT_TOKEN" envDefault:"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"`
 }
 
 type MysqlENV struct {
@@ -38,7 +39,7 @@ type PostgresENV struct {
 	DSNAccount string `env:"ACCOUNT_MYSQL_URL" envDefault:"stock_user:secret@tcp(db:3306)/stock?parseTime=true&loc=Local"`
 }
 
-type Logger struct {
+type LoggerEnv struct {
 	FilePath      string `env:"filePath"`
 	Level         string `env:"level"`
 	MaxSize       int    `env:"maxSize"`

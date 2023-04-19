@@ -17,7 +17,7 @@ type handler struct {
 }
 
 func New(
-	cfg config.Config,
+	cfg config.IConfig,
 	serviceCore service.ICore,
 	v validator.IValidate,
 	l logger.ILogger,

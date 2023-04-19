@@ -8,8 +8,16 @@ import (
 	"github.com/go-playground/validator"
 )
 
-func New() Config {
-	cfg := Config{}
+type IConfig interface {
+	GetSystemENV() SystemENV
+	GetMysqlENV() MysqlENV
+	GetPostgresENV() PostgresENV
+	GetLoggerENV() LoggerEnv
+	GetServiceName() string
+}
+
+func New() IConfig {
+	cfg := &config{}
 	if err := env.Parse(&cfg); err != nil {
 		log.Fatal(fmt.Errorf("parse config fail, reason : %v", err))
 	}
@@ -20,18 +28,22 @@ func New() Config {
 	return cfg
 }
 
-func (cfg Config) GetSystemENV() SystemENV {
+func (cfg config) GetSystemENV() SystemENV {
 	return cfg.SystemENV
 }
 
-func (cfg Config) GetMysqlENV() MysqlENV {
+func (cfg config) GetMysqlENV() MysqlENV {
 	return cfg.MysqlENV
 }
 
-func (cfg Config) GetPostgresENV() PostgresENV {
+func (cfg config) GetPostgresENV() PostgresENV {
 	return cfg.PostgresENV
 }
 
-func (cfg Config) GetServiceName() string {
+func (cfg config) GetLoggerENV() LoggerEnv {
+	return cfg.LoggerEnv
+}
+
+func (cfg config) GetServiceName() string {
 	return serviceName
 }

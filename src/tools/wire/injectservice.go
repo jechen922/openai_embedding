@@ -36,7 +36,7 @@ func provideService(db database.IDatabase) service.ICore {
 }
 
 func provideHandler(
-	cfg config.Config,
+	cfg config.IConfig,
 	s service.ICore,
 	v validator.IValidate,
 	l logger.ILogger,
@@ -63,6 +63,6 @@ func provideValidator(l logger.ILogger) validator.IValidate {
 	return validator.New(l)
 }
 
-func provideLogger(cfg config.Config) logger.ILogger {
-	return logger.New(cfg.Logger)
+func provideLogger(cfg config.IConfig) logger.ILogger {
+	return logger.New(cfg.GetLoggerENV())
 }

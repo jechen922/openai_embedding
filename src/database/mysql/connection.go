@@ -18,7 +18,7 @@ type IDB interface {
 }
 
 type connection struct {
-	config config.Config
+	config config.IConfig
 	pool   map[string]*gorm.DB
 }
 
