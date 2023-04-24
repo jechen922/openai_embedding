@@ -28,7 +28,7 @@ type SystemENV struct {
 	Port         int    `env:"port" envDefault:"8080"`
 	RunMode      string `env:"runMode" envDefault:"local"`
 	Timezone     string `env:"timezone" envDefault:"UTC"`
-	ChatGPTToken string `env:"CHAT_GPT_TOKEN" envDefault:"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"`
+	ChatGPTToken string `env:"CHAT_GPT_TOKEN" envDefault:""`
 }
 
 type MysqlENV struct {

@@ -8,7 +8,7 @@ import (
 )
 
 func Ask(question string) string {
-	client := openai.NewClient("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")
+	client := openai.NewClient("")
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
@@ -59,7 +59,7 @@ linkedin:https://pse.is/3jk42e`},
 }
 
 func AskTest(question string) string {
-	client := openai.NewClient("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")
+	client := openai.NewClient("")
 	resp, err := client.CreateCompletion(
 		context.Background(),
 		openai.CompletionRequest{
@@ -87,7 +87,7 @@ var embeddingInputs = []string{
 }
 
 func CreateEmbeddings() string {
-	client := openai.NewClient("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")
+	client := openai.NewClient("")
 	resp, err := client.CreateEmbeddings(
 		context.Background(),
 		openai.EmbeddingRequest{

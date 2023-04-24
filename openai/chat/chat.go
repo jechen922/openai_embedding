@@ -13,7 +13,7 @@ var defaultChatMessage = []openai.ChatCompletionMessage{
 }
 
 func client() *openai.Client {
-	return openai.NewClient("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")
+	return openai.NewClient("")
 }
 
 func GetTitle(question string) string {

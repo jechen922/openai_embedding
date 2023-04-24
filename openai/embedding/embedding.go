@@ -17,7 +17,7 @@ type Section struct {
 }
 
 func client() *openai.Client {
-	return openai.NewClient("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")
+	return openai.NewClient("")
 }
 
 func Category(category po.OpenAICategory) (po.OpenAICategory, error) {
