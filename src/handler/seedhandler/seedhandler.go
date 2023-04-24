@@ -29,6 +29,9 @@ func (h *seedHandler) Train(ctx *fiber.Ctx) error {
 	csvRecords := file.ReadCSVByFields("./resources/yile/yile.csv", "title", "heading", "content")
 	sections := make([]embedding.Section, 0, len(csvRecords))
 	for _, record := range csvRecords {
+		if record["title"] != "員工福利規範" {
+			continue
+		}
 		sections = append(sections, embedding.Section{
 			Title:   record["title"],
 			Heading: record["heading"],

@@ -3,6 +3,7 @@ module openaigo
 go 1.20
 
 require (
+	github.com/agnivade/levenshtein v1.1.1
 	github.com/caarlos0/env/v6 v6.10.1
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
